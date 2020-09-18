@@ -1111,7 +1111,7 @@ static int mqtt_message_receive(esp_mqtt_client_handle_t client, int read_poll_t
             }
             int topic_len = client->mqtt_state.in_buffer[fixed_header_len] << 8;
             topic_len |= client->mqtt_state.in_buffer[fixed_header_len + 1];
-            total_len = fixed_header_len + topic_len + (mqtt_get_qos(client->mqtt_state.in_buffer) > 0 ? 2 : 0);
+            total_len = fixed_header_len + 2 + topic_len + (mqtt_get_qos(client->mqtt_state.in_buffer) > 0 ? 2 : 0);
             ESP_LOGD(TAG, "%s: total len modified to %d as message longer than input buffer", __func__, total_len);
             if (client->mqtt_state.in_buffer_length < total_len) {
                 ESP_LOGE(TAG, "%s: message is too big, insufficient buffer size", __func__);
